@@ -200,10 +200,6 @@
     <ClCompile Include="lib\AcidLib\src\Math\Math.cpp" />
     <ClCompile Include="lib\AcidLib\src\Math\Trig.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\grammar\test1.grly" />
-    <None Include="assets\grammar\test2.grly" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
