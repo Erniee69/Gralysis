@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Array.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\ArrayList.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\DynamicArray.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Graph.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Pair.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Map.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Stack.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Tree.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Exception\EmptyStackException.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Exception\Exception.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Exception\GraphException.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Exception\IndexOutOfBoundsException.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Exception\KeyAlreadyExistsException.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Exception\KeyNotFoundException.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Exception\NoParentException.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Math\Constants.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Math\Math.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Math\Transform.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Math\Trig.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Math\Vector.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\String\BasicString.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\String\String.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Utilities\ConstIterator.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Utilities\Iterator.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Utilities\NonCopyable.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\AcidLib\include\AcidLib\Utilities\Typedefs.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="lib\AcidLib\src\Math\Math.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\AcidLib\src\Math\Trig.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\AcidLib\src\Exception\EmptyStackException.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\AcidLib\src\Exception\GraphException.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\AcidLib\src\Exception\IndexOutOfBoundsException.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\AcidLib\src\Exception\KeyAlreadyExistsException.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\AcidLib\src\Exception\KeyNotFoundException.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\AcidLib\src\Exception\NoParentException.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\grammar\test1.grly" />
+    <None Include="assets\grammar\test2.grly" />
+  </ItemGroup>
+</Project>

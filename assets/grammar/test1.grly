@@ -1,0 +1,20 @@
+NONTERMINAL ::= "<" [A-Za-z0-9-_']+ ">";
+TERMINAL ::= "\"" $* "\"";
+LEXTOKEN ::= [A-Z][A-Z0-9]*;
+NUMQUANT ::= "{" [0-9]+ "}";
+CHARCLASS ::= "[" $+ "]" => {
+	ANY ::= $;
+};
+SKIP ::= " " | "\n" | "\t" | "\r";
+<Grammar> ::= (<LexRule> | <GramRule>)+;
+<LexRule> ::= LEXTOKEN "::=" <LexExpression> <SubLexBlock>? ";";
+<SubLexBlock> ::= "=>" "{" <LexRule>+ "}";
+<LexExpression> ::= <LexTerm>+ ("|" <LexTerm>+)*;
+<LexTerm> ::= <LexFactor> ("+" | "*" | "?" | NUMQUANT)?;
+<LexFactor> ::= TERMINAL | <CharClass> | "(" <LexExpression> ")";
+<GramRule> ::= NONTERMINAL "::=" <GramExpression> ";";
+<GramExpression> ::= <GramTerm>+ ("|" <GramTerm>+)*;
+<GramTerm> ::= <GramFactor> ("+" | "*" | "?" | NUMQUANT)?;
+<GramFactor> ::= TERMINAL | NONTERMINAL | LEXTOKEN | <CharClass>
+               | "(" <GramExpression> ")";
+<CharClass> ::= "[" ($ | $ "-" $)+ "]";
