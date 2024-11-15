@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\GenericToken.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Array.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\ArrayList.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\DynamicArray.hpp" />
