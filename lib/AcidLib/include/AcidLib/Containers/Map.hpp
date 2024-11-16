@@ -3,6 +3,9 @@
 #include <AcidLib/Utilities/ConstIterator.hpp>
 #include <AcidLib/Exception/KeyNotFoundException.hpp>
 #include <AcidLib/Exception/KeyAlreadyExistsException.hpp>
+#include <AcidLib/Containers/ArrayList.hpp>
+
+using namespace ac;
 
 template <typename K, typename V>
 class KeyValuePair {
@@ -47,6 +50,10 @@ public:
 	int size() const;
 
 	int capacity() const;
+
+	ArrayList<K> keys() const;
+
+	ArrayList<V> values() const;
 
 	Iterator<KeyValuePair<K, V>> begin();
 
@@ -288,6 +295,32 @@ template <typename K, typename V>
 int Map<K, V>::capacity() const {
 
 	return m_capacity;
+}
+
+template <typename K, typename V>
+ArrayList<K> Map<K, V>::keys() const {
+
+	ArrayList<K> result;
+
+	for (KeyValuePair<K, V> kv : *this) {
+
+		result.append(kv.key);
+	}
+
+	return result;
+}
+
+template <typename K, typename V>
+ArrayList<V> Map<K, V>::values() const {
+
+	ArrayList<V> result;
+
+	for (KeyValuePair<K, V> kv : *this) {
+
+		result.append(kv.value);
+	}
+
+	return result;
 }
 
 template <typename K, typename V>

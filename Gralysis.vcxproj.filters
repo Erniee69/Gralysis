@@ -96,6 +96,12 @@
     <ClInclude Include="include\GenericToken.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="include\GenericLexer.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ValueError.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\AcidLib\src\Math\Math.cpp">
