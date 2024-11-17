@@ -17,7 +17,24 @@ public:
 
 	String lexeme;
 
+	GenericToken(LexerTable& p_lexerTable);
+
+	String getName();
+
 private:
 
 	LexerTable& m_lexerTable;
 };
+
+GenericToken::GenericToken(LexerTable& p_lexerTable) : m_lexerTable(p_lexerTable) {
+
+	row = 0;
+	col = 0;
+
+	tokenID = -1;
+}
+
+String GenericToken::getName() {
+
+	return m_lexerTable.getTokenName(tokenID);
+}

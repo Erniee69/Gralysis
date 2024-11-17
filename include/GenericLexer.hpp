@@ -25,15 +25,19 @@ public:
 class LexerTable {
 public:
 
-	ArrayList<LexerAction> getActions(int state, String lookahead);
+	ArrayList<LexerAction> getActions(int state, String lookahead) const;
 
 	void addActions(int state, String lookahead, LexerAction action);
+
+	void registerTokenName(int tokenID, String tokenName);
+
+	String getTokenName(int tokenID) const;
 
 private:
 
 	Map<int, Map<String, ArrayList<LexerAction>>> m_actionTable;
 
-	ArrayList<String> m_tokenNameTable;
+	Map<int, String> m_tokenNameTable;
 };
 
 class GenericLexer {
@@ -49,7 +53,7 @@ public:
 		String lexeme;
 	};
 
-	GenericTokenStream tokenize(String p_data);
+	ArrayList<GenericToken> tokenize(String p_data);
 
 private:
 
@@ -61,14 +65,14 @@ private:
 	String m_lexeme;
 
 	String m_data;
-	GenericTokenStream m_result;
+	ArrayList<GenericToken> m_result;
 
 	Stack<LexerFrame> m_frameStack;
 
 	LexerTable m_ruleTable;
 };
 
-ArrayList<LexerAction> LexerTable::getActions(int state, String lookahead) {
+ArrayList<LexerAction> LexerTable::getActions(int state, String lookahead) const {
 
 	if (lookahead.size() != 1) {
 
@@ -104,4 +108,12 @@ void LexerTable::addActions(int state, String lookahead, LexerAction action) {
 	m_actionTable[state][lookahead].append(action);
 }
 
-GenericTokenStream tokenize(String p_data);
+void LexerTable::registerTokenName(int tokenID, String tokenName) {
+
+	m_tokenNameTable.append(tokenID, tokenName);
+}
+
+String LexerTable::getTokenName(int tokenID) const {
+
+	return m_tokenNameTable[tokenID];
+}
