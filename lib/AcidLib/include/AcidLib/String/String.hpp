@@ -55,6 +55,8 @@ namespace ac {
 
 		void reserve(int p_capacity);
 
+		int charCount() const;
+
 		int size() const;
 
 		int capacity() const;

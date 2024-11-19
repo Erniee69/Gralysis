@@ -87,9 +87,9 @@ bool CharacterClass::check(String data) {
 
 			tempResult = tempResult && r.check(data[i]);
 		}
-	}
 
-	result = result != negated; // != is xor
+		result = result && (tempResult != negated);
+	}
 
 	return result;
 }
