@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\CharacterClass.hpp" />
     <ClInclude Include="include\GenericLexer.hpp" />
     <ClInclude Include="include\GenericToken.hpp" />
     <ClInclude Include="include\LogicError.hpp" />
@@ -187,7 +188,6 @@
     <ClInclude Include="lib\AcidLib\include\AcidLib\Math\Transform.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Math\Trig.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Math\Vector.hpp" />
-    <ClInclude Include="lib\AcidLib\include\AcidLib\String\BasicString.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\String\String.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Utilities\ConstIterator.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Utilities\Iterator.hpp" />
@@ -203,6 +203,7 @@
     <ClCompile Include="lib\AcidLib\src\Exception\NoParentException.cpp" />
     <ClCompile Include="lib\AcidLib\src\Math\Math.cpp" />
     <ClCompile Include="lib\AcidLib\src\Math\Trig.cpp" />
+    <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

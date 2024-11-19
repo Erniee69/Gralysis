@@ -30,7 +30,7 @@ public:
 
 	ArrayList<LexerAction> getActions(int state, String lookahead) const;
 
-	void addActions(int state, String lookahead, LexerAction action);
+	void addAction(int state, String lookahead, LexerAction action);
 
 	void registerTokenName(int tokenID, String tokenName);
 
@@ -38,7 +38,7 @@ public:
 
 private:
 
-	Map<int, Map<String, ArrayList<LexerAction>>> m_actionTable;
+	Map<int, Map<CharacterClass, ArrayList<LexerAction>>> m_actionTable;
 
 	Map<int, String> m_tokenNameTable;
 };
@@ -111,7 +111,7 @@ ArrayList<LexerAction> LexerTable::getActions(int state, String lookahead) const
 	}
 }
 
-void LexerTable::addActions(int state, String lookahead, LexerAction action) {
+void LexerTable::addAction(int state, String lookahead, LexerAction action) {
 
 	if (lookahead.size() > 1) {
 
