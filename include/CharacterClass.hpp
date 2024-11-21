@@ -19,51 +19,41 @@ public:
 
 		RuleType type;
 
-		Rule(String p_singleChar);
-		Rule(String p_rangeStart, String p_rangeEnd);
+		Rule(char p_singleChar);
+		Rule(char p_rangeStart, char p_rangeEnd);
 
-		bool check(String data) const;
+		bool check(char data) const;
 
 	private:
 
-		String singleChar;
-		Pair<String, String> charRange;
+		union {
+
+			char singleChar;
+			Pair<char, char> charRange;
+		};
 	};
 
-	bool negated;
-
-	ArrayList<Rule> rules;
+	void setNegated(bool p_negated);
 
 	void addRule(Rule r);
 
-	bool check(String data) const;
+	bool check(char data) const;
+
+private:
+
+	bool negated;
+
+	ArrayList<Rule> m_rules;
 };
 
-CharacterClass::Rule::Rule(String p_singleChar) {
+CharacterClass::Rule::Rule(char p_singleChar) {
 
 	type = Rule::SingleChar;
-
-	if (p_singleChar.size() != 1) {
-
-		if (p_singleChar != "EOI") {
-
-			throw ValueError("CharClass SingleChar Rule can only be 1 char or \"EOI\"");
-		}
-	}
 
 	singleChar = p_singleChar;
 }
 
-CharacterClass::Rule::Rule(String p_rangeStart, String p_rangeEnd) {
-
-	if (p_rangeStart.size() != 1) {
-
-		throw ValueError("CharClass CharRange start can only be 1 char");
-	}
-	if (p_rangeEnd.size() != 1) {
-
-		throw ValueError("CharClass CharRange end can only be 1 char");
-	}
+CharacterClass::Rule::Rule(char p_rangeStart, char p_rangeEnd) {
 
 	type = Rule::CharRange;
 
@@ -71,44 +61,37 @@ CharacterClass::Rule::Rule(String p_rangeStart, String p_rangeEnd) {
 	charRange.second = p_rangeEnd;
 }
 
-bool CharacterClass::Rule::check(String data) const {
+bool CharacterClass::Rule::check(char data) const {
 
-	bool result = true;
+	if (type == Rule::SingleChar) {
 
-	for (int i = 0; i < data.size(); i++) {
-		
-		if (type == Rule::SingleChar) {
-
-			result = result && (String(data[i]) == singleChar);
-		}
-		else {
-
-			result = result && (data[i] >= charRange.first[0] && data[i] <= charRange.second[0]);
-		}
+		return singleChar == data;
 	}
+	else {
 
-	return result;
+		return (charRange.first <= data) && (data <= charRange.second);
+	}
+}
+
+void CharacterClass::setNegated(bool p_negated) {
+
+	negated = p_negated;
 }
 
 void CharacterClass::addRule(Rule r) {
 
-	rules.append(r);
+	m_rules.append(r);
 }
 
-bool CharacterClass::check(String data) const {
+bool CharacterClass::check(char data) const {
 
 	bool result = true;
 
-	for (int i = 0; i < data.size(); i++) {
+	for (Rule r : m_rules) {
 
-		bool tempResult = true;
+		bool ruleResult = r.check(data);
 
-		for (const Rule& r : rules) {
-
-			tempResult = tempResult && r.check(data[i]);
-		}
-
-		result = result && (tempResult != negated);
+		result = result && (negated ? !ruleResult : ruleResult);
 	}
 
 	return result;

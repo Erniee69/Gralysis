@@ -164,9 +164,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\CharacterClass.hpp" />
-    <ClInclude Include="include\GenericLexer.hpp" />
+    <ClInclude Include="include\Lexer.hpp" />
     <ClInclude Include="include\GenericToken.hpp" />
     <ClInclude Include="include\LogicError.hpp" />
+    <ClInclude Include="include\Match.hpp" />
     <ClInclude Include="include\ValueError.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Array.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\ArrayList.hpp" />
