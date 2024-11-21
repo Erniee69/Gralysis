@@ -90,7 +90,7 @@
     <ClInclude Include="lib\AcidLib\include\AcidLib\Utilities\Typedefs.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\GenericToken.hpp">
+    <ClInclude Include="include\Token.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\Lexer.hpp">
