@@ -105,7 +105,7 @@
     <ClInclude Include="include\CharacterClass.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\Match.hpp">
+    <ClInclude Include="include\LexingMatch.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="include\LexingTable.hpp">

@@ -2,10 +2,10 @@
 #include <CharacterClass.hpp>
 #include <ValueError.hpp>
 
-class Match {
+class LexingMatch {
 public:
 
-	enum MatchType {
+	enum LexingMatchType {
 
 		Character,
 		CharClass,
@@ -13,13 +13,13 @@ public:
 		Fallback,
 	};
 
-	MatchType type;
+	LexingMatchType type;
 
-	Match(char p_character);
-	Match(CharacterClass p_charClass);
-	Match(MatchType p_type);
+	LexingMatch(char p_character);
+	LexingMatch(CharacterClass p_charClass);
+	LexingMatch(LexingMatchType p_type);
 
-	~Match();
+	~LexingMatch();
 
 	bool operator==(char other) const;
 	bool operator!=(char other) const;
@@ -37,25 +37,25 @@ private:
 	};
 };
 
-Match::Match(char p_character) {
+LexingMatch::LexingMatch(char p_character) {
 
-	type = Match::Character;
+	type = LexingMatch::Character;
 	character = p_character;
 }
 
-Match::Match(CharacterClass p_charClass) {
+LexingMatch::LexingMatch(CharacterClass p_charClass) {
 
-	type = Match::CharClass;
+	type = LexingMatch::CharClass;
 	charClass = p_charClass;
 }
 
-Match::Match(MatchType p_type) {
+LexingMatch::LexingMatch(LexingMatchType p_type) {
 
-	if (p_type == Match::Character) {
+	if (p_type == LexingMatch::Character) {
 
 		throw ValueError("Can't initialize character match without character!");
 	}
-	else if (p_type == Match::CharClass) {
+	else if (p_type == LexingMatch::CharClass) {
 
 		throw ValueError("Can't initialize character class match without character class!");
 	}
@@ -65,25 +65,25 @@ Match::Match(MatchType p_type) {
 	}
 }
 
-Match::~Match() {
+LexingMatch::~LexingMatch() {
 
-	if (type == Match::CharClass) {
+	if (type == LexingMatch::CharClass) {
 
 		charClass.~CharacterClass();
 	}
 }
 
-bool Match::operator==(char other) const {
+bool LexingMatch::operator==(char other) const {
 
-	if (type == Match::Character) {
+	if (type == LexingMatch::Character) {
 
 		return character == other;
 	}
-	else if (type == Match::CharClass) {
+	else if (type == LexingMatch::CharClass) {
 
 		return charClass.check(other);
 	}
-	else if (type == Match::EndOfInput) {
+	else if (type == LexingMatch::EndOfInput) {
 
 		return other == '\0';
 	}
@@ -93,14 +93,14 @@ bool Match::operator==(char other) const {
 	}
 }
 
-bool Match::operator!=(char other) const {
+bool LexingMatch::operator!=(char other) const {
 
 	return !(*this == other);
 }
 
-char Match::getChar() const {
+char LexingMatch::getChar() const {
 
-	if (type != Match::Character) {
+	if (type != LexingMatch::Character) {
 
 		throw ValueError("Can't get character of a non character match!");
 	}
@@ -110,9 +110,9 @@ char Match::getChar() const {
 	}
 }
 
-CharacterClass Match::getCharClass() const {
+CharacterClass LexingMatch::getCharClass() const {
 
-	if (type != Match::CharClass) {
+	if (type != LexingMatch::CharClass) {
 
 		throw ValueError("Can't get character class of a non character class match!");
 	}

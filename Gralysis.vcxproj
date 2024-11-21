@@ -169,7 +169,7 @@
     <ClInclude Include="include\LexingTable.hpp" />
     <ClInclude Include="include\Token.hpp" />
     <ClInclude Include="include\LogicError.hpp" />
-    <ClInclude Include="include\Match.hpp" />
+    <ClInclude Include="include\LexingMatch.hpp" />
     <ClInclude Include="include\ValueError.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Array.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\ArrayList.hpp" />

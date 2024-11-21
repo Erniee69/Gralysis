@@ -47,6 +47,7 @@ LexingAction::LexingAction(LexingActionType p_type) {
 	else {
 
 		type = p_type;
+		pushedTokenType = 0;
 	}
 }
 
