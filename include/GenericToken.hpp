@@ -17,16 +17,16 @@ public:
 
 	String lexeme;
 
-	GenericToken(LexerTable& p_lexerTable);
+	GenericToken(LexerTable* p_lexerTable);
 
 	String getName();
 
 private:
 
-	LexerTable& m_lexerTable;
+	LexerTable* m_lexerTable;
 };
 
-GenericToken::GenericToken(LexerTable& p_lexerTable) : m_lexerTable(p_lexerTable) {
+GenericToken::GenericToken(LexerTable* p_lexerTable) : m_lexerTable(p_lexerTable) {
 
 	row = 0;
 	col = 0;
@@ -36,5 +36,5 @@ GenericToken::GenericToken(LexerTable& p_lexerTable) : m_lexerTable(p_lexerTable
 
 String GenericToken::getName() {
 
-	return m_lexerTable.getTokenName(tokenID);
+	return m_lexerTable->getTokenName(tokenID);
 }

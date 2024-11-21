@@ -22,7 +22,7 @@ public:
 		Rule(String p_singleChar);
 		Rule(String p_rangeStart, String p_rangeEnd);
 
-		bool check(String data);
+		bool check(String data) const;
 
 	private:
 
@@ -36,22 +36,42 @@ public:
 
 	void addRule(Rule r);
 
-	bool check(String data);
+	bool check(String data) const;
 };
 
 CharacterClass::Rule::Rule(String p_singleChar) {
 
 	type = Rule::SingleChar;
 
+	if (p_singleChar.size() != 1) {
+
+		if (p_singleChar != "EOI") {
+
+			throw ValueError("CharClass SingleChar Rule can only be 1 char or \"EOI\"");
+		}
+	}
+
 	singleChar = p_singleChar;
 }
 
 CharacterClass::Rule::Rule(String p_rangeStart, String p_rangeEnd) {
 
+	if (p_rangeStart.size() != 1) {
+
+		throw ValueError("CharClass CharRange start can only be 1 char");
+	}
+	if (p_rangeEnd.size() != 1) {
+
+		throw ValueError("CharClass CharRange end can only be 1 char");
+	}
+
 	type = Rule::CharRange;
+
+	charRange.first = p_rangeStart;
+	charRange.second = p_rangeEnd;
 }
 
-bool CharacterClass::Rule::check(String data) {
+bool CharacterClass::Rule::check(String data) const {
 
 	bool result = true;
 
@@ -75,7 +95,7 @@ void CharacterClass::addRule(Rule r) {
 	rules.append(r);
 }
 
-bool CharacterClass::check(String data) {
+bool CharacterClass::check(String data) const {
 
 	bool result = true;
 
@@ -83,7 +103,7 @@ bool CharacterClass::check(String data) {
 
 		bool tempResult = true;
 
-		for (Rule& r : rules) {
+		for (const Rule& r : rules) {
 
 			tempResult = tempResult && r.check(data[i]);
 		}

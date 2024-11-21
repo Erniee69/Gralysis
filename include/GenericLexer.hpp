@@ -5,6 +5,7 @@
 #include <ValueError.hpp>
 #include <LogicError.hpp>
 #include <GenericToken.hpp>
+#include <CharacterClass.hpp>
 
 using namespace ac;
 
@@ -25,12 +26,27 @@ public:
 	int pushedTokenType;
 };
 
+class LexerMatch {
+public:
+
+	enum LexerMatchType {
+
+		CharClass,
+		EndOfInput,
+		Fallback,
+	};
+
+	LexerMatchType type;
+
+	CharacterClass charClass;
+};
+
 class LexerTable {
 public:
 
 	ArrayList<LexerAction> getActions(int state, String lookahead) const;
 
-	void addAction(int state, String lookahead, LexerAction action);
+	void addAction(int state, LexerMatch match, LexerAction action);
 
 	void registerTokenName(int tokenID, String tokenName);
 
@@ -38,7 +54,7 @@ public:
 
 private:
 
-	Map<int, Map<CharacterClass, ArrayList<LexerAction>>> m_actionTable;
+	Map<int, Map<LexerMatch, ArrayList<LexerAction>>> m_actionTable;
 
 	Map<int, String> m_tokenNameTable;
 };
@@ -102,36 +118,53 @@ ArrayList<LexerAction> LexerTable::getActions(int state, String lookahead) const
 		}
 	}
 
-	try {
-		return m_actionTable[state][lookahead];
-	}
-	catch (KeyNotFoundException) {
+	for (const KeyValuePair<int, Map<LexerMatch, ArrayList<LexerAction>>>& kv1 : m_actionTable) {
+
+		if (kv1.key == state) {
+
+			for (const KeyValuePair<LexerMatch, ArrayList<LexerAction>>& kv2 : kv1.value) {
+
+				if (kv2.key.type == LexerMatch::CharClass) {
+
+					if (lookahead.size() == 1 && kv2.key.charClass.check(lookahead)) {
+
+						return kv2.value;
+					}
+				}
+				else if (kv2.key.type == LexerMatch::EndOfInput) {
+
+					if (lookahead == "EOI") {
+
+						return kv2.value;
+					}
+				}
+				else if (kv2.key.type == LexerMatch::Fallback) {
+
+					if (lookahead == "else") {
+
+						return kv2.value;
+					}
+				}
+			}
+		}
 
 		return ArrayList<LexerAction>();
 	}
 }
 
-void LexerTable::addAction(int state, String lookahead, LexerAction action) {
-
-	if (lookahead.size() > 1) {
-
-		if (lookahead != "EOI" && lookahead != "else") {
-
-			throw ValueError("Lookahead can only be a single char, \"EOI\", or \"else\"");
-		}
-	}
+void LexerTable::addAction(int state, LexerMatch match, LexerAction action) {
 
 	if (!m_actionTable.keys().contains(state)) {
 
-		m_actionTable.append(state, Map<String, ArrayList<LexerAction>>());
+		m_actionTable.append(state, Map<LexerMatch, ArrayList<LexerAction>>());
 	}
 
-	if (!m_actionTable[state].keys().contains(lookahead)) {
+	if (!m_actionTable[state].keys().contains(match)) {
 
-		m_actionTable[state].append(lookahead, ArrayList<LexerAction>());
+		m_actionTable[state].append(match, ArrayList<LexerAction>());
 	}
 
-	m_actionTable[state][lookahead].append(action);
+	m_actionTable[state][match].append(action);
 }
 
 void LexerTable::registerTokenName(int tokenID, String tokenName) {
