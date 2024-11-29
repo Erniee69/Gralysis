@@ -27,6 +27,8 @@ namespace ac {
 
 		const T& peek() const;
 
+		void clear();
+
 		int size() const;
 
 		bool isEmpty() const;
@@ -169,6 +171,12 @@ namespace ac {
 		}
 
 		return m_base[m_size - 1];
+	}
+
+	template <typename T>
+	void Stack<T>::clear() {
+
+		m_size = 0;
 	}
 
 	template <typename T>

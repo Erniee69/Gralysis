@@ -19,6 +19,7 @@ public:
 
 		RuleType type;
 
+		Rule();
 		Rule(char p_singleChar);
 		Rule(char p_rangeStart, char p_rangeEnd);
 
@@ -45,6 +46,12 @@ private:
 
 	ArrayList<Rule> m_rules;
 };
+
+CharacterClass::Rule::Rule() {
+
+	type = Rule::SingleChar;
+	singleChar = '\0';
+}
 
 CharacterClass::Rule::Rule(char p_singleChar) {
 

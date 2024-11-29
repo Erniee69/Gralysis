@@ -51,6 +51,10 @@ public:
 
 	int capacity() const;
 
+	bool has(const K& key) const;
+
+	bool contains(const V& value) const;
+
 	ArrayList<K> keys() const;
 
 	ArrayList<V> values() const;
@@ -295,6 +299,34 @@ template <typename K, typename V>
 int Map<K, V>::capacity() const {
 
 	return m_capacity;
+}
+
+template <typename K, typename V>
+bool Map<K, V>::has(const K& key) const {
+
+	for (int i = 0; i < m_size; i++) {
+
+		if (m_data[i].key == key) {
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+template <typename K, typename V>
+bool Map<K, V>::contains(const V& value) const {
+
+	for (int i = 0; i < m_size; i++) {
+
+		if (m_data[i].value == value) {
+
+			return true;
+		}
+	}
+
+	return false;
 }
 
 template <typename K, typename V>

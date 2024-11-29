@@ -163,14 +163,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\LexingAction.hpp" />
-    <ClInclude Include="include\CharacterClass.hpp" />
-    <ClInclude Include="include\Lexer.hpp" />
-    <ClInclude Include="include\LexingTable.hpp" />
-    <ClInclude Include="include\Token.hpp" />
-    <ClInclude Include="include\LogicError.hpp" />
-    <ClInclude Include="include\LexingMatch.hpp" />
-    <ClInclude Include="include\ValueError.hpp" />
+    <ClInclude Include="include\Lexer\LexerTable.hpp" />
+    <ClInclude Include="include\Lexer\LexerAction.hpp" />
+    <ClInclude Include="include\Utilities\CharacterClass.hpp" />
+    <ClInclude Include="include\Lexer\Lexer.hpp" />
+    <ClInclude Include="include\Lexer\Token.hpp" />
+    <ClInclude Include="include\Utilities\LogicError.hpp" />
+    <ClInclude Include="include\Lexer\CharacterValidator.hpp" />
+    <ClInclude Include="include\Utilities\ValueError.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\Array.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\ArrayList.hpp" />
     <ClInclude Include="lib\AcidLib\include\AcidLib\Containers\DynamicArray.hpp" />

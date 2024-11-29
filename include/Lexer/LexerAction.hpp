@@ -1,10 +1,10 @@
 #pragma once
-#include <ValueError.hpp>
+#include <Utilities/ValueError.hpp>
 
-class LexingAction {
+class LexerAction {
 public:
 
-	enum LexingActionType {
+	enum LexerActionType {
 
 		Shift,
 		Push,
@@ -13,10 +13,10 @@ public:
 		Error,
 	};
 
-	LexingActionType type;
+	LexerActionType type;
 
-	LexingAction(LexingActionType p_type);
-	LexingAction(LexingActionType p_type, int intVal);
+	LexerAction(LexerActionType p_type);
+	LexerAction(LexerActionType p_type, int intVal);
 
 	int getNewState() const;
 	int getPushedTokenType() const;
@@ -30,17 +30,17 @@ private:
 	};
 };
 
-LexingAction::LexingAction(LexingActionType p_type) {
+LexerAction::LexerAction(LexerActionType p_type) {
 
-	if (p_type == LexingActionType::Shift) {
+	if (p_type == LexerActionType::Shift) {
 
 		throw ValueError("Can't initialize a shift action without a state to shift to!");
 	}
-	else if (p_type == LexingActionType::Push) {
+	else if (p_type == LexerActionType::Push) {
 
 		throw ValueError("Can't initialize a push action without a token type to push!");
 	}
-	else if (p_type == LexingActionType::ShiftAndPush) {
+	else if (p_type == LexerActionType::ShiftAndPush) {
 
 		throw ValueError("Can't initialize a shift and push action without a token type to push!");
 	}
@@ -51,11 +51,11 @@ LexingAction::LexingAction(LexingActionType p_type) {
 	}
 }
 
-LexingAction::LexingAction(LexingActionType p_type, int intVal) {
+LexerAction::LexerAction(LexerActionType p_type, int intVal) {
 
 	type = p_type;
 
-	if (type == LexingActionType::Shift) {
+	if (type == LexerActionType::Shift) {
 
 		newState = intVal;
 	}
@@ -65,9 +65,9 @@ LexingAction::LexingAction(LexingActionType p_type, int intVal) {
 	}
 }
 
-int LexingAction::getNewState() const {
+int LexerAction::getNewState() const {
 
-	if (type != LexingActionType::Shift) {
+	if (type != LexerActionType::Shift) {
 
 		throw ValueError("Can't get new state from non shift action!");
 	}
@@ -75,9 +75,9 @@ int LexingAction::getNewState() const {
 	return newState;
 }
 
-int LexingAction::getPushedTokenType() const {
+int LexerAction::getPushedTokenType() const {
 
-	if (type != LexingActionType::Push && type != LexingActionType::ShiftAndPush) {
+	if (type != LexerActionType::Push && type != LexerActionType::ShiftAndPush) {
 
 		throw ValueError("Can't get pushed token type from non push or non shift and push action!");
 	}
