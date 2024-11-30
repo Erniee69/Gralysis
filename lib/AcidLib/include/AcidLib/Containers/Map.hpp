@@ -156,6 +156,8 @@ Map<K, V>& Map<K, V>::operator=(Map<K, V>&& other) noexcept {
 	other.m_size = 0;
 	other.m_capacity = 0;
 	other.m_data = nullptr;
+
+	return *this;
 }
 
 template <typename K, typename V>

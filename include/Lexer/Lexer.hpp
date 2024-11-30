@@ -86,7 +86,7 @@ ArrayList<Token> Lexer::tokenize(String p_data) {
 
 	m_data = p_data;
 
-	m_current = m_data[0];
+	m_current = (m_data.size() != 0) ? m_data[0] : '\0';
 
 	while (!finished) {
 
@@ -125,6 +125,14 @@ ArrayList<Token> Lexer::tokenize(String p_data) {
 		}
 	}
 
+	for (int i = m_result.size() - 1; i >= 0; i--) {
+
+		if (m_result[i].tokenID == 0) {
+
+			m_result.remove(i);
+		}
+	}
+
 	return m_result;
 }
 
@@ -159,8 +167,11 @@ void Lexer::shift(int newState) {
 	if (m_current != '\0') {
 
 		m_lexeme += m_current;
+		m_index++;
 
-		if (m_index < m_data.size() - 1) {
+		m_col++;
+
+		if (m_index < m_data.size()) {
 
 			m_current = m_data[m_index];
 		}
@@ -168,9 +179,6 @@ void Lexer::shift(int newState) {
 
 			m_current = '\0';
 		}
-
-		m_index++;
-		m_col++;
 
 		if (m_current == '\n') {
 

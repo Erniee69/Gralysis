@@ -15,6 +15,7 @@ public:
 
 	LexerActionType type;
 
+	LexerAction();
 	LexerAction(LexerActionType p_type);
 	LexerAction(LexerActionType p_type, int intVal);
 
@@ -29,6 +30,12 @@ private:
 		int pushedTokenType;
 	};
 };
+
+LexerAction::LexerAction() {
+
+	type = LexerAction::Error;
+	newState = 0;
+}
 
 LexerAction::LexerAction(LexerActionType p_type) {
 

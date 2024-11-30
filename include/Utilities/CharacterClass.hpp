@@ -23,6 +23,9 @@ public:
 		Rule(char p_singleChar);
 		Rule(char p_rangeStart, char p_rangeEnd);
 
+		bool operator==(const Rule& other) const;
+		bool operator!=(const Rule& other) const;
+
 		bool check(char data) const;
 
 	private:
@@ -33,6 +36,9 @@ public:
 			Pair<char, char> charRange;
 		};
 	};
+
+	bool operator==(const CharacterClass& other) const;
+	bool operator!=(const CharacterClass& other) const;
 
 	void setNegated(bool p_negated);
 
@@ -68,6 +74,27 @@ CharacterClass::Rule::Rule(char p_rangeStart, char p_rangeEnd) {
 	charRange.second = p_rangeEnd;
 }
 
+bool CharacterClass::Rule::operator==(const Rule& other) const {
+
+	if (type != other.type) {
+
+		return false;
+	}
+
+	if (type == Rule::SingleChar) {
+
+		return singleChar == other.singleChar;
+	}
+	else {
+
+		return (charRange.first == other.charRange.first) && (charRange.second == other.charRange.second);
+	}
+}
+bool CharacterClass::Rule::operator!=(const Rule& other) const {
+
+	return !(*this == other);
+}
+
 bool CharacterClass::Rule::check(char data) const {
 
 	if (type == Rule::SingleChar) {
@@ -78,6 +105,29 @@ bool CharacterClass::Rule::check(char data) const {
 
 		return (charRange.first <= data) && (data <= charRange.second);
 	}
+}
+
+bool CharacterClass::operator==(const CharacterClass& other) const {
+
+	if (m_rules.size() != other.m_rules.size()) {
+
+		return false;
+	}
+
+	for (int i = 0; i < m_rules.size(); i++) {
+
+		if (m_rules[i] != other.m_rules[i]) {
+
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool CharacterClass::operator!=(const CharacterClass& other) const {
+
+	return !(*this == other);
 }
 
 void CharacterClass::setNegated(bool p_negated) {
