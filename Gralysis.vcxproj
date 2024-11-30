@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Lexer\LexerDebugInfo.hpp" />
     <ClInclude Include="include\Lexer\LexerTable.hpp" />
     <ClInclude Include="include\Lexer\LexerAction.hpp" />
     <ClInclude Include="include\Utilities\CharacterClass.hpp" />

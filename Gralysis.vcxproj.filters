@@ -114,6 +114,9 @@
     <ClInclude Include="include\Lexer\LexerTable.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="include\Lexer\LexerDebugInfo.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\AcidLib\src\Math\Math.cpp">

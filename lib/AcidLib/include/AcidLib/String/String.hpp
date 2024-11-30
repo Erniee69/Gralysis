@@ -300,9 +300,9 @@ namespace ac {
 			result.m_data[i] = m_data[i];
 		}
 
-		for (int i = m_size; i < other.m_size; i++) {
+		for (int i = 0; i < other.m_size; i++) {
 
-			result[m_size + i] = m_data[i];
+			result[i + m_size] = other.m_data[i];
 		}
 
 		return result;

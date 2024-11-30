@@ -5,6 +5,8 @@
 #include <Lexer/LexerAction.hpp>
 #include <Lexer/LexerTable.hpp>
 #include <Lexer/Token.hpp>
+#include <Lexer/LexerDebugInfo.hpp>
+#include <string>
 #include <Utilities/LogicError.hpp>
 
 class Lexer {
@@ -38,16 +40,23 @@ public:
 
 	void restoreFrame(LexerFrame p_frame);
 
+	void setDebug(bool p_debug);
+
+	bool getDebug() const;
+
 	void setTransitionTable(LexerTable p_table);
 
 	LexerTable& getTransitionTable();
 
 	const LexerTable& getTransitionTable() const;
 
+	ArrayList<LexerDebugInfo> getDebugInfo() const;
+
 private:
 
 	bool finished;
 	bool accepted;
+	bool debug;
 
 	int m_state;
 
@@ -64,8 +73,10 @@ private:
 	ArrayList<Token> m_result;
 
 	Stack<LexerFrame> m_frameStack;
-
+	
 	LexerTable m_transitionTable;
+
+	ArrayList<LexerDebugInfo> m_debugInfo;
 
 	void resetLexer();
 };
@@ -73,6 +84,8 @@ private:
 Lexer::Lexer() {
 
 	resetLexer();
+
+	debug = true;
 }
 
 ArrayList<Token> Lexer::tokenize(String p_data) {
@@ -96,8 +109,15 @@ ArrayList<Token> Lexer::tokenize(String p_data) {
 
 			if (m_frameStack.size() == 0) {
 
-				finished = true;
 				accepted = false;
+
+				if (debug) {
+
+					m_debugInfo.append(LexerDebugInfo(LexerDebugInfo::Error, String("[") + std::to_string(m_row).c_str() + ":" + std::to_string(m_col).c_str() + "]: Unexpected token: \"" + String(m_current) + "\""));
+				}
+
+				shift(0);
+				push(-1);
 			}
 			else {
 
@@ -127,7 +147,7 @@ ArrayList<Token> Lexer::tokenize(String p_data) {
 
 	for (int i = m_result.size() - 1; i >= 0; i--) {
 
-		if (m_result[i].tokenID == 0) {
+		if (m_result[i].tokenID == 0 || m_result[i].tokenID == -1) {
 
 			m_result.remove(i);
 		}
@@ -244,6 +264,16 @@ void Lexer::restoreFrame(LexerFrame p_frame) {
 	m_result.resize(p_frame.resultSize);
 }
 
+void Lexer::setDebug(bool p_debug) {
+
+	debug = p_debug;
+}
+
+bool Lexer::getDebug() const {
+
+	return debug;
+}
+
 void Lexer::setTransitionTable(LexerTable p_table) {
 
 	m_transitionTable = p_table;
@@ -257,6 +287,11 @@ LexerTable& Lexer::getTransitionTable() {
 const LexerTable& Lexer::getTransitionTable() const {
 
 	return m_transitionTable;
+}
+
+ArrayList<LexerDebugInfo> Lexer::getDebugInfo() const {
+
+	return m_debugInfo;
 }
 
 void Lexer::resetLexer() {
